@@ -1,3 +1,7 @@
+locals {
+  route53_count = "${var.zone_id != "" ? 1 : 0}"
+}
+
 module "label" {
   source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
   namespace  = "${var.namespace}"
@@ -65,7 +69,7 @@ resource "aws_security_group" "default" {
 }
 
 data "aws_route53_zone" "domain" {
-  count   = "${var.zone_id != "" ? 1 : 0}"
+  count   = "${locals.route53_count}"
   zone_id = "${var.zone_id}"
 }
 
