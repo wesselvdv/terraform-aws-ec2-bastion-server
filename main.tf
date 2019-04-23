@@ -69,7 +69,7 @@ resource "aws_security_group" "default" {
 }
 
 data "aws_route53_zone" "domain" {
-  count   = "${locals.route53_count}"
+  count   = "${local.route53_count}"
   zone_id = "${var.zone_id}"
 }
 
